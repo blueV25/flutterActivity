@@ -70,6 +70,11 @@ class _FormState extends State<UserForm> {
             "Name: ${firstnameController.text} ${lastnameController.text}\n"
             "Email: ${emailController.text}";
       });
+      firstnameController.clear();
+      lastnameController.clear();
+      emailController.clear();
+      passwordController.clear();
+      confirmpasswordController.clear();
     }
   }
 
