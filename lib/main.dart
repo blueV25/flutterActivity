@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xff22e171),
       ),
       // A widget which will be started on application startup
-      home: const MyHomePage(title: ''),
+      home: const MyHomePage(title: 'Hadukin'),
     );
   }
 }
