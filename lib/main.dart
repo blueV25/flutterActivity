@@ -83,11 +83,11 @@ class _FormState extends State<UserForm> {
           children: [
             TextField(
               controller: firstnameController,
-              decoration: InputDecoration(labelText: "Enter FirstName:"),
+              decoration: InputDecoration(labelText: "First Name:"),
             ),
             TextField(
               controller: lastnameController,
-              decoration: InputDecoration(labelText: "Enter LastName:"),
+              decoration: InputDecoration(labelText: "Last Name:"),
             ),
             TextField(
               controller: emailController,
