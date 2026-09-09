@@ -1,6 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,17 +16,17 @@ class MyApp extends StatelessWidget {
       // you want
       theme: ThemeData(
         // useMaterial3: false,
-        primarySwatch: Colors.blue,
+        primaryColor: const Color(0xff22e171),
       ),
       // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: ''),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
   final String title;
-  const MyHomePage({super.key, required this.title});  
+  const MyHomePage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +35,85 @@ class MyHomePage extends StatelessWidget {
         // The title text which will be shown on the action bar
         title: Text(title),
       ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
-        ),
-      ),
+      body: const UserForm(),
     );
+  }
+}
+
+class UserForm extends StatefulWidget {
+  const UserForm({Key? key}) : super(key: key);
+
+  @override
+  State<UserForm> createState() => _FormState();
+}
+
+class _FormState extends State<UserForm> {
+  final TextEditingController firstnameController = TextEditingController();
+  final TextEditingController lastnameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmpasswordController =
+      TextEditingController();
+
+  void submitForm() {
+    if (firstnameController.text.isEmpty ||
+        lastnameController.text.isEmpty ||
+        !emailController.text.contains("@") ||
+        passwordController.text.isEmpty ||
+        passwordController.text != confirmpasswordController.text) {
+      setState(() {
+        info = "Invalid input \nPlease check your details.";
+      });
+    } else {
+      setState(() {
+        info = "Registration Successful \n\n"
+            "Name: ${firstnameController.text} ${lastnameController.text}\n"
+            "Email: ${emailController.text}";
+      });
+    }
+  }
+
+  String info = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: firstnameController,
+              decoration: InputDecoration(labelText: "Enter FirstName:"),
+            ),
+            TextField(
+              controller: lastnameController,
+              decoration: InputDecoration(labelText: "Enter LastName:"),
+            ),
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(labelText: "Email: "),
+            ),
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(labelText: "Password"),
+              obscureText: true,
+            ),
+            TextField(
+              controller: confirmpasswordController,
+              decoration: InputDecoration(labelText: "Confirm Password"),
+              obscureText: true,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: submitForm,
+              child: const Text("Register"),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              info,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ));
   }
 }
